@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Allocations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 50%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Daily Allocations</h1>
+    <p id="date"></p>
+
+    <table>
+        <tr>
+            <th>Item</th>
+            <th>Assigned To</th>
+        </tr>
+        <tr>
+            <td>Black Bowl</td>
+            <td id="blackBowl"></td>
+        </tr>
+        <tr>
+            <td>Bum Fork</td>
+            <td id="bumFork"></td>
+        </tr>
+        <tr>
+            <td>Nice Seat</td>
+            <td id="niceSeat"></td>
+        </tr>
+        <tr>
+            <td>Boss</td>
+            <td id="boss"></td>
+        </tr>
+    </table>
+
+    <script>
+        // Define rotation order
+        const people = ["Hayley", "Josh", "Edwyn"];
+
+        // Start date (29th January 2025)
+        const startDate = new Date(2025, 0, 29); // Months are zero-indexed
+        const currentDate = new Date();
+
+        // Calculate the difference in days
+        const daysSinceStart = Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24));
+
+        // Assignments based on rotation with slight shifts
+        document.getElementById("date").textContent = `Today's Date: ${currentDate.toDateString()}`;
+        document.getElementById("blackBowl").textContent = people[daysSinceStart % 3];  // Rotates daily
+        document.getElementById("bumFork").textContent = people[(Math.floor(daysSinceStart / 2) + 1) % 3];  // Rotates every 2 days, shifted by 1
+        document.getElementById("niceSeat").textContent = people[(Math.floor(daysSinceStart / 7) + 3) % 3];  // Rotates weekly, shifted by 3
+        document.getElementById("boss").textContent = people[(daysSinceStart + 2) % 3];  // Rotates daily, shifted by 2
+    </script>
+
+</body>
+</html>
